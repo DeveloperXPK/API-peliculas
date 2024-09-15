@@ -11,10 +11,15 @@ const token = require('../helpers/autenticacion');
 routes.get('/', homeController.home);
 
 // Rutas de autenticacion
+
+// Registrar un usuario
 routes.post('/registrar', autenticacionController.registrarUsuario);
+
+// Iniciar sesion
 routes.post('/login', autenticacionController.iniciarSesion);
 
 // Rutas de peliculas
+// Crear una pelicula
 routes.post('/peliculas',
     // Debemos validar el token antes de verficar el permiso ya que necesitamos el rol del usuario
     token.validarToken,
@@ -24,16 +29,39 @@ routes.post('/peliculas',
     peliculasController.crearPelicula
 );
 
+// Obtener una pelicula por su id
 routes.get('/peliculas/:_id',
     token.validarToken,
     token.verificarPermiso(['Admin', 'Basic']),
     peliculasController.obtenerPelicula
 );
 
+// Obtener todas las peliculas
 routes.get('/peliculas',
     token.validarToken,
     token.verificarPermiso(['Admin', 'Basic']),
     peliculasController.consultarPeliculas
 );
+
+// Obtener peliculas a partir de un rango de precios y lanzamientos
+routes.get('/peliculas/:lanzamiento/:precio',
+    token.validarToken,
+    token.verificarPermiso(['Admin', 'Basic']),
+    peliculasController.consultarPeliculasLanzamientoPrecio
+);
+
+// Eliminar una pelicula por su id
+routes.delete('/peliculas/:_id',
+    token.validarToken,
+    token.verificarPermiso(['Admin']),
+    peliculasController.eliminarPelicula
+)
+
+// Actualizar una pelicula por su id
+routes.put('/peliculas/:_id',
+    token.validarToken,
+    token.verificarPermiso(['Admin']),
+    peliculasController.editarPelicula
+)
 
 module.exports = routes;

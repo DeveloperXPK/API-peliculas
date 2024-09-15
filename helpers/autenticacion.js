@@ -28,7 +28,7 @@ function validarToken(req, res, nextStep) {
         nextStep();
     } catch (err) {
         res.status(403)
-            .send({ message: 'Token invalido' });
+            .send({ message: 'No se ha iniciado Sesion' });
     }
 }
 
@@ -39,7 +39,8 @@ function verificarPermiso(rolesPermitidos) {
         if (rolesPermitidos.includes(rolUsuario)) {
             next(); // Permitir el acceso
         } else {
-            res.status(403).send({ message: 'Permiso denegado' });
+            res.status(403)
+                .send({ message: 'Permiso denegado' });
         }
     };
 }
