@@ -1,0 +1,19 @@
+{
+  "name": "parcial-1",
+  "version": "1.0.0",
+  "description": "parcial 1",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js"
+  },
+  "author": "Andres Giraldo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.17.1",
+    "mongoose": "5.9.7",
+    "body-parser": "1.19.0",
+    "bcrypt": "5.1.1",
+    "jwt-simple": "0.5.6",
+    "moment": "2.30.1"
+  }
+}
